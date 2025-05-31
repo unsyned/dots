@@ -21,6 +21,8 @@ return {
       end
     )
 
-    require("lazy-lsp").setup{}
+    require("lazy-lsp").setup{
+      excluded_servers = {"taplo"},
+    }
   end,
 }
