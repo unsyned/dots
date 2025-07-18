@@ -31,7 +31,7 @@ require("lazy").setup({
     { import = "plugins.comment" },
     { import = "plugins.todo-comments" },
     { import = "plugins.render-markdown" },
-    { import = "plugins.catppuccin" },
+    { import = "plugins.theme" },
     { import = "plugins.treesitter" },
     { import = "plugins.luasnip" },
     { import = "plugins.nvim-cmp" },

@@ -7,7 +7,8 @@ return
       config = function()
         require("lualine").setup({
           options = {
-            theme = "palenight",
+            -- theme = "palenight",
+            theme = "kanagawa-paper-ink",
           },
         })
       end,
