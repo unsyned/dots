@@ -2,6 +2,7 @@ font-family = "FiraCode Font"
 # disable ligatures
 font-feature=-calt
 theme = tokyonight-storm
+# theme = kanagawa wave
 background-opacity = 0.9
 # min blur 0, max blur 20
 background-blur = 15
