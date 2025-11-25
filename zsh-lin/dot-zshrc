@@ -15,6 +15,7 @@ export SUDO_EDITOR=nvim
 export EDITOR=nvim
 
 alias nv="nvim "
+alias gsm='git stash -m '
 alias unstow="stow --delete"
 alias rewstow="stow --restow"
 
