@@ -69,8 +69,8 @@ vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete without yanking" })
 vim.keymap.set("n", "<leader>D", '"_d$', { desc = "Delete without yanking" })
 
 -- buffer nav
-vim.keymap.set("n", "<leader>bn", ":bn", { desc = "Next buffer" })
-vim.keymap.set("n", "<leader>bp", ":bp", { desc = "Previous buffer" })
+vim.keymap.set("n", "<leader>bn", ":bn<CR>", { desc = "Next buffer" })
+vim.keymap.set("n", "<leader>bp", ":bp<CR>", { desc = "Previous buffer" })
 
 --------------------INSERT MODE--------------------
 -- augments
