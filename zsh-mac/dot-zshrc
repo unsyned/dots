@@ -15,6 +15,7 @@ export SUDO_EDITOR=nvim
 export EDITOR=nvim
 
 alias nv='nvim '
+alias gsm='git stash -m '
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time Oh My Zsh is loaded, in which case,
