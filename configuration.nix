@@ -90,8 +90,10 @@
   };
 
   # Enable automatic login for the user.
-  services.displayManager.autoLogin.enable = false;
-  services.xserver.displayManager.autoLogin.user = "unsyned";
+  services.displayManager.autoLogin = {
+    enable = false;
+    user = "unsyned";
+  };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -136,6 +138,8 @@
   system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
+  # increase download buffer size for large packages
+  nix.settings.download-buffer-size = 134217728; # 128MiB
 
   # set default shell
   environment.shells = with pkgs; [ zsh bash];

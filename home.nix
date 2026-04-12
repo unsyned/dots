@@ -1,13 +1,11 @@
 { config, pkgs, ... }:
 
-let
-  aliases = {
-      nv = "nvim";
-      hm = "home-manager";
-  };
-in
-
 {
+  imports = [
+    ./sh.nix
+    ./apps.nix
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
   home.username = "unsyned";
@@ -66,46 +64,6 @@ in
   #
   home.sessionVariables = {
     EDITOR = "nvim";
-  };
-
-  programs = {
-    # shell things :P
-    zsh = {
-      enable = true;
-      shellAliases = aliases;
-      oh-my-zsh = {
-        enable = true;
-        plugins = [ "git" ];
-      };
-    };
-
-    bash = {
-      enable = true;
-      shellAliases = aliases;
-    };
-
-    oh-my-posh = {
-      enable = true;
-      useTheme = "amro";
-      enableZshIntegration = true;
-      enableBashIntegration = true;
-    };
-
-    neovim.enable = true;
-
-    git = {
-      enable = true;
-      settings = {
-        user.name = "sy";
-        user.email = "stroudafk@gmail.com";
-        push.autoSetupRemote = true;
-        core.pager = "less -FRX";
-        core.editor = "nvim";
-      };
-      # extraConfig = {}; # for things that aren't integrated yet
-    };
-
-    ghostty.enable = true;
   };
 
   # Let Home Manager install and manage itself.
