@@ -18,9 +18,6 @@
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -69,6 +66,18 @@
   #
   home.sessionVariables = {
     # EDITOR = "emacs";
+    EDITOR = "nvim";
+  };
+
+  programs = {
+    zsh.enable = true;
+    neovim.enable = true;
+
+    git = {
+      enable = true;
+      settings.user.name = "sy";
+      settings.user.email = "stroudafk@gmail.com";
+    };
   };
 
   # Let Home Manager install and manage itself.
