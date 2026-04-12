@@ -47,8 +47,23 @@
   services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services = {
+    desktopManager.plasma6.enable = true;
+    displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = true;
+  };
+
+  environment.plasma6.excludePackages = with pkgs; [
+    kdePackages.elisa # Music player
+    kdePackages.kdepim-runtime # Akonadi agents
+    kdePackages.kmahjongg
+    kdePackages.kmines
+    kdePackages.konversation # IRC client
+    kdePackages.kpat # Solitaire
+    kdePackages.ksudoku
+    kdePackages.ktorrent
+  ];
+
 
   # Configure keymap in X11
   services.xserver.xkb = {
