@@ -95,8 +95,14 @@ in
 
     git = {
       enable = true;
-      settings.user.name = "sy";
-      settings.user.email = "stroudafk@gmail.com";
+      settings = {
+        user.name = "sy";
+        user.email = "stroudafk@gmail.com";
+        push.autoSetupRemote = true;
+        core.pager = "less -FRX";
+        core.editor = "nvim";
+      };
+      # extraConfig = {}; # for things that aren't integrated yet
     };
 
     ghostty.enable = true;
