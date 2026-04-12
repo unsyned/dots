@@ -7,6 +7,7 @@
 
     # cli
     pkgs.tree
+    pkgs.nerd-fonts.fira-code
 
     # utility
     pkgs.google-chrome
