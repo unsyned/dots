@@ -65,7 +65,6 @@ in
   #  /etc/profiles/per-user/unsyned/etc/profile.d/hm-session-vars.sh
   #
   home.sessionVariables = {
-    # EDITOR = "emacs";
     EDITOR = "nvim";
   };
 
