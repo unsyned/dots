@@ -1,5 +1,12 @@
 { config, pkgs, ... }:
 
+let
+  aliases = {
+      nv = "nvim";
+      hm = "home-manager";
+  };
+in
+
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -36,16 +43,8 @@
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
-    # # Building this configuration will create a copy of 'dotfiles/screenrc' in
-    # # the Nix store. Activating the configuration will then make '~/.screenrc' a
-    # # symlink to the Nix store copy.
-    # ".screenrc".source = dotfiles/screenrc;
+    # home.file."${config.xdg.configHome}/ohmyposh/zen.toml".source = ./path/to/your/zen.toml;
 
-    # # You can also set the file content immediately.
-    # ".gradle/gradle.properties".text = ''
-    #   org.gradle.console=verbose
-    #   org.gradle.daemon.idletimeout=3600000
-    # '';
   };
 
   # Home Manager can also manage your environment variables through
@@ -70,7 +69,28 @@
   };
 
   programs = {
-    zsh.enable = true;
+    # shell things :P
+    zsh = {
+      enable = true;
+      shellAliases = aliases;
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" ];
+      };
+    };
+
+    bash = {
+      enable = true;
+      shellAliases = aliases;
+    };
+
+    oh-my-posh = {
+      enable = true;
+      useTheme = "amro";
+      enableZshIntegration = true;
+      enableBashIntegration = true;
+    };
+
     neovim.enable = true;
 
     git = {
@@ -78,6 +98,8 @@
       settings.user.name = "sy";
       settings.user.email = "stroudafk@gmail.com";
     };
+
+    ghostty.enable = true;
   };
 
   # Let Home Manager install and manage itself.

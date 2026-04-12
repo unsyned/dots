@@ -60,7 +60,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -90,7 +90,7 @@
   };
 
   # Enable automatic login for the user.
-  services.xserver.displayManager.autoLogin.enable = true;
+  services.displayManager.autoLogin.enable = false;
   services.xserver.displayManager.autoLogin.user = "unsyned";
 
   # Install firefox.
@@ -102,9 +102,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  wget
-  git
+    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    wget
+    git
+    kdePackages.sddm-kcm 	# to change sddm settings via gui
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
@@ -118,7 +119,7 @@
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -135,5 +136,10 @@
   system.stateVersion = "24.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes"];
+
+  # set default shell
+  environment.shells = with pkgs; [ zsh bash];
+  users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
 
 }
