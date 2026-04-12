@@ -5,6 +5,9 @@
     pkgs.steam
     pkgs.spotify
 
+    # cli
+    pkgs.tree
+
     # utility
     pkgs.google-chrome
     pkgs.libreoffice
