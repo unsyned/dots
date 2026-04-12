@@ -42,9 +42,10 @@ in
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
-  home.file = {
-    # home.file."${config.xdg.configHome}/ohmyposh/zen.toml".source = ./path/to/your/zen.toml;
-
+  home.file."${config.xdg.configHome}/nvim" = {
+  # home.file.".config/nvim" = { # equivalent to the above
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/nvim";
+    recursive = true;
   };
 
   # Home Manager can also manage your environment variables through
