@@ -1,23 +1,26 @@
 { config, pkgs, ... }:
 
 {
-  home.packages = [
-    pkgs.steam
-    pkgs.spotify
+  home.packages = with pkgs; [
+    spotify
+
+    # games
+    steam
+    wineWowPackages.stable # https://nixos.wiki/wiki/Wine
 
     # cli
-    pkgs.tree
-    pkgs.nerd-fonts.fira-code
+    tree
+    nerd-fonts.fira-code
 
     # utility
-    pkgs.google-chrome
-    pkgs.libreoffice
+    google-chrome
+    libreoffice
 
     # DE stuff - move out if it gets too big or has logic
-    pkgs.kdePackages.sddm-kcm
-    pkgs.kdePackages.kde-gtk-config
-    pkgs.wayland-utils # Wayland diagnostic tools
-    pkgs.wl-clipboard # Wayland copy/paste support
+    kdePackages.sddm-kcm
+    kdePackages.kde-gtk-config
+    wayland-utils # Wayland diagnostic tools
+    wl-clipboard # Wayland copy/paste support
   ];
 
   programs = {
