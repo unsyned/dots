@@ -2,10 +2,10 @@
 
 {
   imports = [
-    inputs.plasma-manager.homeManagerModules.plasma-manager
+    # inputs.plasma-manager.homeManagerModules.plasma-manager
     ./sh.nix
     ./apps.nix
-    ./plasma.nix
+    # ./plasma.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should

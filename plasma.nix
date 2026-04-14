@@ -1,12 +1,35 @@
 {
+
+  # https://nix-community.github.io/plasma-manager/options.xhtml
   programs.plasma = {
     enable = true;
 
+      kscreenlocker.appearance.wallpaper = "/home/unsyned/dots/walls/darkest-hour.jpg";
+
     workspace = {
-      lookAndFeel = "Dream-Dark-Color-Global-6";
+      # lock screen image after entering password
+      # lookAndFeel = "Dream-Dark-Color-Global-6";
+      lookAndFeel = "org.magpie.irixium.desktop";
+      # splashScreen = {
+      #   theme = "a2n.kuro";
+      # };
       cursor.theme = "phinger-cursors-dark";
-      # iconTheme = "";
+      wallpaper = "/home/unsyned/dots/walls/darkest-hour.jpg";
+      iconTheme = "BesotHaiku";
     };
+
+    # kwin.nightLight.mode = "automatic";
+    # kwin.nightLight.mode = "constant";
+
+    panels = [
+      {
+        location = "bottom";
+        hiding = "autohide";
+        lengthMode = "fill";
+        height = 36;
+        # offset = 100;
+      }
+    ];
 
     shortcuts = {
       ActivityManager.switch-to-activity-bb407d13-0254-4721-bd97-dafe0faeebfa = [ ];
@@ -275,8 +298,8 @@
       kdeglobals.WM.inactiveBlend = "30,30,46";
       kdeglobals.WM.inactiveForeground = "186,194,222";
       krunnerrc.General.FreeFloating = true;
-      kscreenlockerrc."Greeter/Wallpaper/org.kde.image/General".Image = "/home/unsyned/Downloads/rainy-night-storm.JPG";
-      kscreenlockerrc."Greeter/Wallpaper/org.kde.image/General".PreviewImage = "/home/unsyned/Downloads/rainy-night-storm.JPG";
+      # kscreenlockerrc."Greeter/Wallpaper/org.kde.image/General".Image = "/home/unsyned/dots/walls/rainy-night-storm.JPG";
+      # kscreenlockerrc."Greeter/Wallpaper/org.kde.image/General".PreviewImage = "/home/unsyned/dots/walls/rainy-night-storm.JPG";
       kwalletrc.Wallet."First Use" = false;
       kwinrc.Desktops.Id_1 = "f1b2ac61-83f2-4eab-8714-5064bbac8439";
       kwinrc.Desktops.Number = 1;

@@ -21,7 +21,23 @@
     kdePackages.kde-gtk-config
     wayland-utils # Wayland diagnostic tools
     wl-clipboard # Wayland copy/paste support
+    libsForQt5.qtstyleplugin-kvantum
+    qt6Packages.qtstyleplugin-kvantum
+
+    # theming... required for all DEs and WMs I think?
+    # qt6ct
+    qt6Packages.qt6ct
+    libsForQt5.qt5ct
   ];
+
+  # qt = {
+  #   enable = true;
+  #   platformTheme = "qtct";
+  #
+  #   kvantum = {
+  #     enable = true;
+  #   };
+  # };
 
   programs = {
     # cli
