@@ -5,6 +5,7 @@
     # inputs.plasma-manager.homeManagerModules.plasma-manager
     ./sh.nix
     ./apps.nix
+    ./emacs.nix
     # ./plasma.nix
   ];
 

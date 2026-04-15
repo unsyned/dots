@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   home.packages = with pkgs; [
@@ -11,6 +11,7 @@
     # cli
     tree
     nerd-fonts.fira-code
+    glow # render markdown in cli
 
     # utility
     google-chrome
@@ -54,6 +55,7 @@
     };
 
     neovim.enable = true;
+    # emacs.enable = true;
     bat.enable = true;
     ghostty.enable = true;
     yazi.enable = true;
