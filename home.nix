@@ -69,9 +69,6 @@
   #
   #  /etc/profiles/per-user/unsyned/etc/profile.d/hm-session-vars.sh
   #
-  home.sessionVariables = {
-    EDITOR = "nvim";
-  };
 
   home.pointerCursor = {
     name = "phinger-cursors-dark";

@@ -8,6 +8,11 @@ let
 in
 
 {
+  home.sessionVariables = {
+    EDITOR = "nvim";
+    VISUAL = "emacsclient -c -a emacs";
+  };
+
   programs = {
     # shell things :P
     zsh = {
@@ -26,7 +31,7 @@ in
 
     oh-my-posh = {
       enable = true;
-      useTheme = "amro";
+      useTheme = "material";
       enableZshIntegration = true;
       enableBashIntegration = true;
     };
