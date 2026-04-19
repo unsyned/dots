@@ -48,6 +48,10 @@
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/nvim";
     recursive = true;
   };
+  home.file."${config.xdg.configHome}/doom" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/doom";
+    recursive = true;
+  };
 
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
