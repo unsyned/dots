@@ -51,6 +51,7 @@
         push.autoSetupRemote = true;
         core.pager = "less -FRX";
         core.editor = "nvim";
+        core.visual = "emacsclient -c -a emacs";
       };
       # extraConfig = {}; # for things that aren't integrated yet
     };
