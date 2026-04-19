@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, zen-browser, ... }:
 
 {
   home.packages = with pkgs; [
     spotify
+    zen-browser.packages.${pkgs.system}.default
 
     # games
     steam

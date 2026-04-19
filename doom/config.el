@@ -1,3 +1,4 @@
+;;; -*- lexical-binding: t -*-
 (defun my/evil-add-space-below ()
   "Add empty line below cursor"
   (interactive)
@@ -27,7 +28,7 @@
   (forward-line -1)
   (indent-according-to-mode))
 
-
+;;; KEYMAP ;;;
 (map! :leader
       :desc "Insert empty line below cursor" "l" #'my/evil-add-space-below)
 (map! :leader
@@ -40,3 +41,18 @@
 ;; center line when browsing search results
 (advice-add #'evil-ex-search-next :after #'doom-recenter-a)
 (advice-add #'evil-ex-search-previous :after #'doom-recenter-a)
+
+;;; OPTIONS ;;;
+; set hybrid line numbers
+(global-display-line-numbers-mode t)
+(setq display-line-numbers-type 'relative)
+
+(setq doom-theme 'doom-tokyo-night)
+(setq fancy-splash-image (concat doom-user-dir "emacs.png"))
+
+;; org mode
+(defun my/org-setup ()
+  (olivetti-mode 1))
+
+(add-hook 'org-mode-hook #'my/org-setup)
+
