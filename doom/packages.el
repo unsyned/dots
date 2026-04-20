@@ -11,7 +11,7 @@
 
 (package! olivetti)
 (package! org-modern)
-
+(package! org-super-agenda)
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;; (package! some-package)

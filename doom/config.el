@@ -47,12 +47,49 @@
 (global-display-line-numbers-mode t)
 (setq display-line-numbers-type 'relative)
 
-(setq doom-theme 'doom-tokyo-night)
+;; (setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-one)
 (setq fancy-splash-image (concat doom-user-dir "emacs.png"))
 
 ;; org mode
 (defun my/org-setup ()
-  (olivetti-mode 1))
+  (olivetti-mode))
+
+(with-eval-after-load 'org (global-org-modern-mode))
+; (after! 'org (global-org-modern-mode))
 
 (add-hook 'org-mode-hook #'my/org-setup)
 
+;; agenda
+(setq org-agenda-files '("~/Agenda"))
+
+(defun my/agenda-setup ()
+  (olivetti-mode)
+  (org-super-agenda-mode))
+
+(add-hook 'org-agenda-mode-hook 'my/agenda-setup)
+
+(after! org
+    (setq org-modern-star '(("◉" "○" "◈" "◇" "󰫢" "●" "◆"))
+          org-modern-checkbox '((?X . "󰄲")
+                                (?x . "󰄲")
+                                (?- . "󰍵")
+                                (?! . "󰀧")
+                                (?  . "󰄱"))
+          org-modern-list '((?- . "–")
+                            (?* . "●")
+                            (?+ . "○")))
+    (dolist (face '((org-level-1 . 1.35)
+                    (org-level-2 . 1.3)
+                    (org-level-3 . 1.2)
+                    (org-level-4 . 1.1)
+                    (org-level-5 . 1.1)
+                    (org-level-6 . 1.1)
+                    (org-level-7 . 1.1)
+                    (org-level-8 . 1.1)))
+      (set-face-attribute (car face) nil :height (cdr face)))
+    (set-face-attribute 'org-document-title nil :weight 'bold :height 1.8)
+    (setq org-src-fontify-natively t
+	  org-src-tab-acts-natively t
+          org-src-content-indentation 0)
+    (setq org-startup-indented nil))
