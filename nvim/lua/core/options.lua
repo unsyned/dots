@@ -53,3 +53,8 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank()
   end,
 })
+
+-- absolute line numbers in insert mode, hybrid in normal
+ vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
+
+vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })
