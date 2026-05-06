@@ -1,7 +1,14 @@
-{ pkgs, zen-browser, ... }:
+{ pkgs, upkgs, zen-browser, ... }:
+
+# let
+
+#   pkgsUnstable = import <nixpkgs-unstable> {};
+
+# in
 
 {
-  home.packages = with pkgs; [
+  # home.packages = with pkgs; [
+  home.packages = (with pkgs; [
     spotify
     zen-browser.packages.${pkgs.system}.default
 
@@ -13,6 +20,11 @@
     tree
     nerd-fonts.fira-code
     glow # render markdown in cli
+
+    # keyboard // qmk, vial, via
+    qmk
+    via
+    vial
 
     # utility
     google-chrome
@@ -30,7 +42,10 @@
     # qt6ct
     qt6Packages.qt6ct
     libsForQt5.qt5ct
-  ];
+  ]) ++ (with upkgs; [
+    neovim
+    discord
+  ]);
 
   # qt = {
   #   enable = true;
@@ -51,12 +66,18 @@
         push.autoSetupRemote = true;
         core.pager = "less -FRX";
         core.editor = "nvim";
-        core.visual = "emacsclient -c -a emacs";
+        # core.editor = "emacsclient -c -a emacs";
+        # core.editor = "emacs -nw";
+        # core.editor = "emacsclient -nw -a """;
       };
       # extraConfig = {}; # for things that aren't integrated yet
     };
 
-    neovim.enable = true;
+    # neovim = {
+    #   enable = true;
+    #   package = upkgs.neovim;
+    # };
+
     # emacs.enable = true;
     bat.enable = true;
     ghostty.enable = true;

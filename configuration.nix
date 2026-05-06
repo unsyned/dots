@@ -164,4 +164,13 @@
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
 
+  # keyboard // qmk, vial, via
+  # Enables QMK udev rules
+  hardware.keyboard.qmk.enable = true;
+  # Vial, via udev rules
+  services.udev.packages = [
+    pkgs.vial
+    pkgs.via
+  ];
+
 }

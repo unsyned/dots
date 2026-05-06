@@ -5,6 +5,7 @@
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     # or
     # nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
 
@@ -26,13 +27,18 @@
   };
 
 
-  outputs =  {self, nixpkgs, home-manager, zen-browser, ... } @ inputs :
+  outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... } @ inputs :
     let 
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       # this version cannot be congfigured?
       # pkgs = nixpkgs.legacyPackages.${system};
       pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
+      upkgs = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -50,6 +56,7 @@
         inherit pkgs;
         modules = [ ./home.nix ];
         extraSpecialArgs = {
+          inherit upkgs;
           inherit inputs;
           inherit zen-browser;
         };
