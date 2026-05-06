@@ -3,6 +3,16 @@ require("core")
 -- todo remove or add to conditional when plugin theme is added
 vim.cmd.colorscheme("retrobox")
 
+vim.pack.add({
+    'https://github.com/lewis6991/gitsigns.nvim',
+  --   {
+  --   src = 'https://github.com/lewis6991/gitsigns.nvim',
+  --   version = vim.version.range('^2.1.0'),
+  -- }
+})
+
+-- require('gitsigns')
+
 -- -- Bootstrap lazy.nvim. So I think it clones the repo if not present?
 -- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 -- if not (vim.uv or vim.loop).fs_stat(lazypath) then
