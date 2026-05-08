@@ -1,7 +1,6 @@
 require("core")
 
 -- todo remove or add to conditional when plugin theme is added
-vim.cmd.colorscheme("retrobox")
 
 vim.pack.add({
     'https://github.com/lewis6991/gitsigns.nvim',
@@ -12,6 +11,13 @@ vim.pack.add({
     'https://github.com/justinmk/vim-sneak',
     'https://github.com/tpope/vim-surround',
     'https://github.com/neogitorg/neogit',
+    'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/windwp/nvim-autopairs',
+    'https://github.com/folke/todo-comments.nvim',
+    -- 'https://github.com/thesimonho/kanagawa-paper.nvim',
+    'https://github.com/rebelot/kanagawa.nvim',
+    'https://github.com/nvim-tree/nvim-web-devicons',
+    'https://github.com/nvim-lualine/lualine.nvim', -- requires devicons
 })
 
 local neogit = require('neogit')
@@ -21,8 +27,25 @@ vim.keymap.set(
     function() neogit.open({ kind = "replace" }) end, -- or split/auto
     { desc = "Open Neogit UI" }
 )
+require('nvim-autopairs').setup({})
+require('todo-comments').setup({
+  signs = false, 
+})
 
--- require('gitsigns')
+local status_ok, kanagawa = pcall(require, 'kanagawa')
+if not status_ok then
+  vim.cmd.colorscheme('retrobox')
+else
+  kanagawa.setup({})
+  vim.cmd.colorscheme('kanagawa')
+end
+require('lualine').setup({
+  options = { theme = 'tomorrow_night' },
+})
+-- local status_ok, _ = pcall(vim.cmd.colorscheme, "kanagawa-paper")
+-- if not status_ok then
+--   vim.cmd.colorscheme("retrobox")
+-- end
 
 -- -- Bootstrap lazy.nvim. So I think it clones the repo if not present?
 -- local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"

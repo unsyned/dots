@@ -6,6 +6,7 @@
     - using https://gitlab.com/carmanaught/kwin-scripts for this for now
 - try plasma manager again
 
+- clean up nvim config
 
 ### emacs custom distro
 - evil
