@@ -9,7 +9,18 @@ vim.pack.add({
   --   src = 'https://github.com/lewis6991/gitsigns.nvim',
   --   version = vim.version.range('^2.1.0'),
   -- }
+    'https://github.com/justinmk/vim-sneak',
+    'https://github.com/tpope/vim-surround',
+    'https://github.com/neogitorg/neogit',
 })
+
+local neogit = require('neogit')
+vim.keymap.set(
+    "n",
+    "<leader>gg",
+    function() neogit.open({ kind = "replace" }) end, -- or split/auto
+    { desc = "Open Neogit UI" }
+)
 
 -- require('gitsigns')
 
