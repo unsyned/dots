@@ -1,6 +1,8 @@
 
 --------------------KEY BINDINGS--------------------
 vim.g.mapleader=" "
+local map = vim.keymap.set
+-- local map = vim.keymap.set
 -- also note to self: command :y A will add to yank stack, then you can use @: to repeat the command for every new line you want to add
 -- "ayy to name a register to write to, "Ayy (capital register name) to write to the named register. does the same as above but will overwrite the buffer if you mistype a lowercase 
 -- "ap to paste/put
@@ -11,109 +13,132 @@ vim.g.mapleader=" "
 --------------------NORMAL MODE--------------------
 -- augments
 -- center cursor after some vertical movement
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down, center cursor", noremap = true })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up, center cursor", noremap = true })
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next search result, unfold", noremap = true })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Previous search result, unfold", noremap = true })
+map("n", "<C-d>", "<C-d>zz", { desc = "Half page down, center cursor" })
+map("n", "<C-u>", "<C-u>zz", { desc = "Half page up, center cursor" })
+map("n", "n", "nzzzv", { desc = "Next search result, unfold" })
+map("n", "N", "Nzzzv", { desc = "Previous search result, unfold" })
 
 -- better J [[TENTATIVE]]
-vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines, preserve cursor position" })
+map("n", "J", "mzJ`z", { desc = "Join lines, preserve cursor position" })
 
 -- amendments
--- vim.keymap.set("n", "<leader>e", "<cmd>Neotree toggle<CR>", {desc = "Toggle NeoTree"})
-vim.keymap.set("n", "<leader>ff", function()
-  require("fzf-lua").files()
-end, { desc = "fzf: Find files" })
+-- map("n", "<leader>e", "<cmd>Neotree toggle<CR>", {desc = "Toggle NeoTree"})
+map("n", "<leader>ff", function()
+  require("fzf-lua").global()
+end, { desc = "fzf: Find" })
+
+map("n", "<leader>fr", function()
+  require("fzf-lua").oldfiles()
+end, { desc = "fzf: Find recent" })
+
+map("n", "<leader>bi", function()
+  require("fzf-lua").buffers()
+end, { desc = "fzf: Buffer interactive list" })
 
 -- clear search results highlights upon esc
-vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights", noremap = true, silent = true })
+map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights", silent = true })
 
 -- go to middle of line (may want to use this bind for "go to last mark" instead)
 -- alternative is :call cursor(0, len(getline('.'))/2)
-vim.keymap.set("n", "<leader>m", "gM", { desc = "Go to middle of line", noremap = true })
+map("n", "<leader>m", "gM", { desc = "Go to middle of line" })
 
 -- quick marks
-vim.keymap.set("n", "<leader>s", "`s", { desc = "Go to s mark", noremap = true })
-vim.keymap.set("n", "<leader><leader>s", "ms", { desc = "Create s mark", noremap = true })
-vim.keymap.set("n", "<leader>r", "`r", { desc = "Go to r mark", noremap = true })
-vim.keymap.set("n", "<leader><leader>r", "mr", { desc = "Create r mark", noremap = true })
+map("n", "<leader>s", "`s", { desc = "Go to s mark" })
+map("n", "<leader><leader>s", "ms", { desc = "Create s mark" })
+map("n", "<leader>r", "`r", { desc = "Go to r mark" })
+map("n", "<leader><leader>r", "mr", { desc = "Create r mark" })
 
 -- add empty line below and above lines with leader i a
-vim.keymap.set("n", "<leader>i", "mzO<Esc>0D`z", { desc = "Insert space", noremap = true })
-vim.keymap.set("n", "<leader>a", "mzo<Esc>0D`z", { desc = "Append space", noremap = true })
+map("n", "<leader>i", "mzO<Esc>0D`z", { desc = "Insert space" })
+map("n", "<leader>a", "mzo<Esc>0D`z", { desc = "Append space" })
 
 -- move line above/below and match indent
-vim.keymap.set("n", "<A-Up>", "<cmd>m-2<CR>==", { desc = "Move line up" })
-vim.keymap.set("n", "<A-Down>", "<cmd>m+<CR>==", { desc = "Move line down" })
+map("n", "<A-Up>", "<cmd>m-2<CR>==", { desc = "Move line up" })
+map("n", "<A-Down>", "<cmd>m+<CR>==", { desc = "Move line down" })
 
 -- switch window focus
-vim.keymap.set("n", "<leader>ww", "<C-w><C-w>", { desc = "Switch focus to another window", noremap = true })
-vim.keymap.set("n", "<leader>w<Left>", "<C-w><C-h>", { desc = "Move focus to the left window", noremap = true })
-vim.keymap.set("n", "<leader>w<Right>", "<C-w><C-l>", { desc = "Move focus to the right window", noremap = true })
-vim.keymap.set("n", "<leader>w<Down>", "<C-w><C-j>", { desc = "Move focus to the lower window", noremap = true })
-vim.keymap.set("n", "<leader>w<Up>", "<C-w><C-k>", { desc = "Move focus to the upper window", noremap = true })
--- for normie boards
-vim.keymap.set("n", "<leader>wh", "<C-w><C-h>", { desc = "Move focus to the left window", noremap = true })
-vim.keymap.set("n", "<leader>wl", "<C-w><C-l>", { desc = "Move focus to the right window", noremap = true })
-vim.keymap.set("n", "<leader>wj", "<C-w><C-j>", { desc = "Move focus to the lower window", noremap = true })
-vim.keymap.set("n", "<leader>wk", "<C-w><C-k>", { desc = "Move focus to the upper window", noremap = true })
+-- NOTE: trying the ctrl window binds again
+map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+map("n", "<leader>ww", "<C-w><C-w>", { desc = "Cycle focus to next window" })
+
+map("n", "<leader>w<Left>", "<C-w><C-h>", { desc = "Move focus to the left window" })
+map("n", "<leader>w<Right>", "<C-w><C-l>", { desc = "Move focus to the right window" })
+map("n", "<leader>w<Down>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+map("n", "<leader>w<Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+-- for normie boards NOTE: is this still needed
+map("n", "<leader>wh", "<C-w><C-h>", { desc = "Move focus to the left window" })
+map("n", "<leader>wl", "<C-w><C-l>", { desc = "Move focus to the right window" })
+map("n", "<leader>wj", "<C-w><C-j>", { desc = "Move focus to the lower window" })
+map("n", "<leader>wk", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Manage splits
-vim.keymap.set("n", "<leader>ws", ":sp<CR>", { desc = "Open split", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>wv", ":vsp<CR>", { desc = "Open vertical split", noremap = true, silent = true })
+map("n", "<leader>ws", ":sp<CR>", { desc = "Open split", silent = true })
+map("n", "<leader>wv", ":vsp<CR>", { desc = "Open vertical split", silent = true })
 
 -- resize splits with (meta) alt + <,>,s,f
 -- TODO: consider deleting these
-vim.keymap.set("n", "<M-.>", "<C-w>5>", { desc = "Expand vertical viewport 5 columns", noremap = true })
-vim.keymap.set("n", "<M-,>", "<C-w>5<", { desc = "Shrink vertical viewport 5 columns", noremap = true })
-vim.keymap.set("n", "<M-s>", "<C-w>+", { desc = "Expand viewport", noremap = true })
-vim.keymap.set("n", "<M-f>", "<C-w>-", { desc = "Shrink viewport", noremap = true })
+-- map("n", "<M-.>", "<C-w>5>", { desc = "Expand vertical viewport 5 columns" })
+-- map("n", "<M-,>", "<C-w>5<", { desc = "Shrink vertical viewport 5 columns" })
+-- map("n", "<M-s>", "<C-w>+", { desc = "Expand viewport" })
+-- map("n", "<M-f>", "<C-w>-", { desc = "Shrink viewport" })
 
 -- paste from system clipboard
-vim.keymap.set({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard", noremap = true })
+map({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
+map({"n", "v"}, "<leader>P", '"+P', { desc = "Paste from system clipboard" })
 
 -- yank to system clipboard
-vim.keymap.set("n", "<leader>y", '"+y', { desc = "Yank line to system clipboard", noremap = true })
+map({"n", "v"}, "<leader>y", '"+y', { desc = "Yank line to system clipboard" })
 
 -- Y to end of line
-vim.keymap.set("n", "Y", "y$", { desc = "Yank to end of line", noremap = true })
+map("n", "Y", "y$", { desc = "Yank to end of line" })
 
 -- delete without yanking
-vim.keymap.set("n", "<leader>d", '"_d', { desc = "Delete without yanking", noremap = true })
-vim.keymap.set("n", "<leader>D", '"_d$', { desc = "Delete without yanking", noremap = true })
+map({"n", "v"}, "<leader>d", '"_d', { desc = "Delete without yanking" })
+map({"n", "v"}, "<leader>D", '"_d$', { desc = "Delete without yanking" })
 
 -- buffer nav
-vim.keymap.set("n", "<leader>bn", ":bn<CR>", { desc = "Next buffer", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>bp", ":bp<CR>", { desc = "Previous buffer", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>ba", ":bad %:h/", { desc = "Add buffer", noremap = true, silent = true })
+map("n", "<C-n>", ":bn<CR>", { desc = "Next buffer" , silent = true })
+map("n", "<C-p>", ":bp<CR>", { desc = "Previous buffer" , silent = true })
+
+map("n", "<leader>bn", ":bn<CR>", { desc = "Next buffer" , silent = true })
+map("n", "<leader>bp", ":bp<CR>", { desc = "Previous buffer" , silent = true })
+map("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" , silent = true })
+map("n", "<leader>ba", ":bad %:h/", { desc = "Add buffer" , silent = true })
+
+-- quickfix nav
+map("n", "<M-j>", ":cn<CR>", { desc = "Next quickfix" , silent = true })
+map("n", "<M-k>", ":cp<CR>", { desc = "Previous quickfix" , silent = true })
 
 -- Open
-vim.keymap.set("n", "<leader>ot", ":sp | te<CR>", { desc = "Open terminal in split", noremap = true, silent = true })
-vim.keymap.set("n", "<leader>oe", ":Ex<CR>", { desc = "Open explorer (head directory)", noremap = true, silent = true })
+map("n", "<leader>ot", ":sp | te<CR>", { desc = "Open terminal in split" , silent = true })
+map("n", "<leader>oe", ":Ex<CR>", { desc = "Open explorer (head directory)" , silent = true })
 
 --------------------INSERT MODE--------------------
 -- augments
 -- easy Esc on normie boards
-vim.keymap.set("i", "jj", "<Esc>", { noremap = true })
+map("i", "jj", "<Esc>", {  })
 
 -- move line above/below and match indent
-vim.keymap.set("i", "<A-Up>", "<Esc><cmd>m-2<CR>==gi", { desc = "Move line up", noremap = true })
-vim.keymap.set("i", "<A-Down>", "<Esc><cmd>m+<CR>==gi", { desc = "Move line down", noremap = true })
+map("i", "<A-Up>", "<Esc><cmd>m-2<CR>==gi", { desc = "Move line up" })
+map("i", "<A-Down>", "<Esc><cmd>m+<CR>==gi", { desc = "Move line down" })
 
 --------------------VISUAL MODE--------------------
 -- augments
 -- indent and preserve selection
-vim.keymap.set("v", "<", "<gv", { desc = "Indent left, preserve selection", noremap = true })
-vim.keymap.set("v", ">", ">gv", { desc = "Indent left, preserve selection", noremap = true })
+map("v", "<", "<gv", { desc = "Indent left, preserve selection" })
+map("v", ">", ">gv", { desc = "Indent left, preserve selection" })
 
 -- amendments
 -- move selection up/down
-vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up", noremap = true, silent = true })
-vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down", noremap = true, silent = true })
+map("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" , silent = true })
+map("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" , silent = true })
 
 -- yank to system clipboard
-vim.keymap.set("v", "<leader>d", '"_d', { desc = "Delete without yanking", noremap = true })
+map("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
 --------------------TERMINAL MODE--------------------
-vim.keymap.set("t", "<Esc>", [[<C-\><C-n>]], { desc = "Return to normal mode", noremap = true })
+map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Return to normal mode" })

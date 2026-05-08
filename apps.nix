@@ -20,6 +20,9 @@
     tree
     nerd-fonts.fira-code
     glow # render markdown in cli
+    fzf
+    ripgrep
+    # zoxide
 
     # keyboard // qmk, vial, via
     qmk

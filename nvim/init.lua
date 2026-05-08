@@ -1,6 +1,5 @@
 require("core")
 
--- todo remove or add to conditional when plugin theme is added
 
 vim.pack.add({
     'https://github.com/lewis6991/gitsigns.nvim',
@@ -14,6 +13,9 @@ vim.pack.add({
     'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/windwp/nvim-autopairs',
     'https://github.com/folke/todo-comments.nvim',
+    'https://github.com/ibhagwan/fzf-lua',
+    'https://github.com/nvim-treesitter/nvim-treesitter-context',
+    -------------- APPEARANCE --------------
     -- 'https://github.com/thesimonho/kanagawa-paper.nvim',
     'https://github.com/rebelot/kanagawa.nvim',
     'https://github.com/nvim-tree/nvim-web-devicons',
@@ -29,8 +31,9 @@ vim.keymap.set(
 )
 require('nvim-autopairs').setup({})
 require('todo-comments').setup({
-  signs = false, 
+  signs = false,
 })
+require('treesitter-context').setup({})
 
 local status_ok, kanagawa = pcall(require, 'kanagawa')
 if not status_ok then
