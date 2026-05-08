@@ -4,6 +4,7 @@ let
   aliases = {
       nv = "nvim";
       hm = "home-manager";
+      gce = "git commit --verbose --amend --no-edit";
   };
 in
 
