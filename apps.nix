@@ -82,6 +82,11 @@
     #   enable = true;
     #   package = upkgs.neovim;
     # };
+    zoxide = {
+      enable = true;
+      enableBashIntegration = true;
+      enableZshIntegration = true;
+    };
 
     # emacs.enable = true;
     bat.enable = true;
