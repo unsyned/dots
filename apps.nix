@@ -25,6 +25,8 @@
     qmk
     via
     vial
+    # required for qmk
+    dos2unix
 
     # utility
     google-chrome
