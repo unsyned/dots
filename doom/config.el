@@ -1,12 +1,12 @@
 ;;; -*- lexical-binding: t -*-
-(defun my/evil-add-space-below ()
+(defun my/evil-insert-space ()
   "Add empty line below cursor"
   (interactive)
   (save-excursion
     (end-of-line)
     (newline-and-indent)))
 
-(defun my/evil-add-space-above ()
+(defun my/evil-append-space ()
   "Add empty line above cursor"
   (interactive)
   (save-excursion
@@ -30,9 +30,9 @@
 
 ;;; KEYMAP ;;;
 (map! :leader
-      :desc "Insert empty line below cursor" "l" #'my/evil-add-space-below)
+      :desc "Insert empty line below cursor" "a" #'my/evil-insert-space)
 (map! :leader
-      :desc "Insert empty line above cursor" "L" #'my/evil-add-space-above)
+      :desc "Insert empty line above cursor" "i" #'my/evil-append-space)
 (map! :n "M-<up>"   #'my/move-line-up
       :n "M-<down>" #'my/move-line-down
       :v "M-<up>"   #'my/move-line-up
