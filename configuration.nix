@@ -22,7 +22,13 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Hardware acceleration
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+    enable = true;
+    extraPackages = with pkgs; [
+      intel-media-driver # For Intel GPUs (Broadwell+)]
+      intel-compute-runtime
+    ];
+  };
 
   # Enable networking
   networking.networkmanager.enable = true;

@@ -53,6 +53,12 @@
     recursive = true;
   };
 
+  home.sessionVariables = {
+    LIBVA_DRIVER_NAME = "iHD"; # force intel media driver
+
+    MOZ_ENABLE_WAYLAND = "1";
+    NIXOS_OZONE_WL = "1";
+  };
   # Home Manager can also manage your environment variables through
   # 'home.sessionVariables'. These will be explicitly sourced when using a
   # shell provided by Home Manager. If you don't want to manage your shell
