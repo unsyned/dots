@@ -23,6 +23,7 @@ vim.o.shiftwidth=0 -- num of spaces to use for each step of indent
 vim.o.expandtab=true
 vim.o.autoindent=true --keep indent level on new line
 vim.o.cindent=true -- indent based on language. should always have auto indent when this is on
+vim.o.smartindent=true -- turn off when using tree sitter
 
 vim.opt.splitright=true
 vim.opt.splitbelow=true

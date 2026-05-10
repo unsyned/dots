@@ -23,6 +23,8 @@ map("n", "J", "mzJ`z", { desc = "Join lines, preserve cursor position" })
 
 -- amendments
 -- map("n", "<leader>e", "<cmd>Neotree toggle<CR>", {desc = "Toggle NeoTree"})
+map("n", "<leader>e", "<cmd>40Lexplore<CR>", { desc = "Open file explorer" })
+
 map("n", "<leader>ff", function()
   require("fzf-lua").global()
 end, { desc = "fzf: Find" })
@@ -58,6 +60,8 @@ map("n", "<A-Down>", "<cmd>m+<CR>==", { desc = "Move line down" })
 
 -- switch window focus
 -- NOTE: trying the ctrl window binds again
+map("n", "<C-s>", "<C-w><C-w>", { desc = "Shift/cycle focus to next window" })
+-- NOTE: if ctrl s causes the terminal to freeze, consider adding `stty -ixon` in the zshrc and bashrc. may compromise backward incremental search though
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
@@ -101,6 +105,7 @@ map({"n", "v"}, "<leader>d", '"_d', { desc = "Delete without yanking" })
 map({"n", "v"}, "<leader>D", '"_d$', { desc = "Delete without yanking" })
 
 -- buffer nav
+map("n", "<M-l>", ":b#<CR>", { desc = "Alt buffer" , silent = true })
 map("n", "<C-n>", ":bn<CR>", { desc = "Next buffer" , silent = true })
 map("n", "<C-p>", ":bp<CR>", { desc = "Previous buffer" , silent = true })
 
@@ -142,3 +147,29 @@ map("v", "<leader>d", '"_d', { desc = "Delete without yanking" })
 
 --------------------TERMINAL MODE--------------------
 map("t", "<Esc>", [[<C-\><C-n>]], { desc = "Return to normal mode" })
+
+--------------------COMMAND MODE--------------------
+-- set wildcharm. not sure if this is needed for different terminals? this is default in nvim
+vim.opt.wildcharm = vim.fn.char2nr("\26") -- equivalent to <C-Z>
+
+-- when completing paths in command mode and wild menu is shown
+-- remap up to direction
+map('c', '<up>', function()
+  return vim.fn.wildmenumode() ~= 0 and '<left>' or '<up>'
+end, { expr = true }) -- evaluate the string as a keypress
+
+-- remap down to direction
+map('c', '<down>', function()
+  return vim.fn.wildmenumode() ~= 0 and '<right>' or '<down>'
+end, { expr = true })
+
+-- remap left to exit directory
+map('c', '<left>', function()
+  return vim.fn.wildmenumode() ~= 0 and '<up>' or '<left>'
+end, { expr = true })
+
+-- remap right to enter directory
+map('c', '<right>', function()
+  return vim.fn.wildmenumode() ~= 0 and ' <bs>\26' or '<right>'
+end, { expr = true })
+

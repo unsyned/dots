@@ -2,26 +2,33 @@ require("core")
 
 
 vim.pack.add({
-    'https://github.com/lewis6991/gitsigns.nvim',
-  --   {
-  --   src = 'https://github.com/lewis6991/gitsigns.nvim',
-  --   version = vim.version.range('^2.1.0'),
-  -- }
-    'https://github.com/justinmk/vim-sneak',
-    'https://github.com/tpope/vim-surround',
-    'https://github.com/neogitorg/neogit',
     'https://github.com/nvim-treesitter/nvim-treesitter',
+    'https://github.com/nemanjamalesija/smart-paste.nvim',
+    'https://github.com/lewis6991/gitsigns.nvim',
+    'https://github.com/justinmk/vim-sneak',
+    'https://github.com/neogitorg/neogit',
+    'https://github.com/tpope/vim-surround',
     'https://github.com/windwp/nvim-autopairs',
-    'https://github.com/folke/todo-comments.nvim',
     'https://github.com/ibhagwan/fzf-lua',
+    'https://github.com/folke/todo-comments.nvim',
     'https://github.com/nvim-treesitter/nvim-treesitter-context',
+
     -------------- APPEARANCE --------------
     -- 'https://github.com/thesimonho/kanagawa-paper.nvim',
     'https://github.com/rebelot/kanagawa.nvim',
     'https://github.com/nvim-tree/nvim-web-devicons',
+    'https://github.com/prichrd/netrw.nvim', -- requires devicons for autoconfig. otherwise must provide icons in the icons table setup
     'https://github.com/nvim-lualine/lualine.nvim', -- requires devicons
+    --   example of version locking
+    --   {
+    --   src = 'https://github.com/lewis6991/gitsigns.nvim',
+    --   version = vim.version.range('^2.1.0'),
+    -- }
 })
 
+vim.o.smartindent = false -- turn off to prevent interference with treesitter
+
+require('smart-paste').setup()
 local neogit = require('neogit')
 vim.keymap.set(
     "n",
@@ -35,13 +42,18 @@ require('todo-comments').setup({
 })
 require('treesitter-context').setup({})
 
+require('netrw').setup({})
+
 local status_ok, kanagawa = pcall(require, 'kanagawa')
+
+-- set theme, fallback to native if not available
 if not status_ok then
   vim.cmd.colorscheme('retrobox')
 else
   kanagawa.setup({})
   vim.cmd.colorscheme('kanagawa')
 end
+
 require('lualine').setup({
   options = { theme = 'tomorrow_night' },
 })
