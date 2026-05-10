@@ -30,12 +30,20 @@ vim.o.smartindent = false -- turn off to prevent interference with treesitter
 
 require('smart-paste').setup()
 local neogit = require('neogit')
+neogit.setup({
+  mappings = {
+    status = {
+      ["<c-s>"]  = false,
+    }
+  },
+})
 vim.keymap.set(
     "n",
     "<leader>gg",
     function() neogit.open({ kind = "replace" }) end, -- or split/auto
     { desc = "Open Neogit UI" }
 )
+
 require('nvim-autopairs').setup({})
 require('todo-comments').setup({
   signs = false,

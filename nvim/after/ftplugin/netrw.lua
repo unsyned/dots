@@ -33,7 +33,7 @@ end
 bind("<TAB>", "mf") -- toggle mark
 bind("<S-TAB>", "mF") -- unmark
 bind("<leader><TAB>", "mu") -- unmark all
-bind("mb", "ma <cmd>silent! argdo badd<CR> <cmd>bd#<CR>") -- Open marked files in buffers, close netrw
+bind("mb", "ma <cmd>silent! argdo badd<CR> <cmd>bw#<CR>") -- Open marked files in buffers, close netrw
 
 -- Files
 vim.keymap.set("n", "f", ":!touch ", { buffer = true }) -- create file
@@ -44,6 +44,7 @@ vim.keymap.set("n", "D", ":!rm -r <cfile> ", { buffer = true }) -- delete
 -- bind("f;", "mx") -- run command
 
 pcall(vim.keymap.del, "n", "<C-l>", { buffer = true }) -- re enable ctrl l for window nav
+pcall(vim.keymap.del, "n", "<C-j>", { buffer = true }) -- re enable ctrl l for window nav
 
 -- show/hide dotfiles. works but messes with icons
 vim.keymap.set("n", ".", function()
