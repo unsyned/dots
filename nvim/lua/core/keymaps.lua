@@ -23,7 +23,7 @@ map("n", "J", "mzJ`z", { desc = "Join lines, preserve cursor position" })
 
 -- amendments
 -- map("n", "<leader>e", "<cmd>Neotree toggle<CR>", {desc = "Toggle NeoTree"})
-map("n", "<leader>e", "<cmd>40Lexplore<CR>", { desc = "Open file explorer" })
+map("n", "<leader>e", "<cmd>35Lexplore<CR>", { desc = "Open file explorer" })
 
 map("n", "<leader>ff", function()
   require("fzf-lua").global()

@@ -29,6 +29,17 @@ vim.pack.add({
 vim.o.smartindent = false -- turn off to prevent interference with treesitter
 
 require('smart-paste').setup()
+
+local status_ok, kanagawa = pcall(require, 'kanagawa')
+
+-- set theme, fallback to native if not available
+if not status_ok then
+  vim.cmd.colorscheme('retrobox')
+else
+  kanagawa.setup({})
+  vim.cmd.colorscheme('kanagawa')
+end
+
 local neogit = require('neogit')
 neogit.setup({
   mappings = {
@@ -51,16 +62,6 @@ require('todo-comments').setup({
 require('treesitter-context').setup({})
 
 require('netrw').setup({})
-
-local status_ok, kanagawa = pcall(require, 'kanagawa')
-
--- set theme, fallback to native if not available
-if not status_ok then
-  vim.cmd.colorscheme('retrobox')
-else
-  kanagawa.setup({})
-  vim.cmd.colorscheme('kanagawa')
-end
 
 require('lualine').setup({
   options = { theme = 'tomorrow_night' },
