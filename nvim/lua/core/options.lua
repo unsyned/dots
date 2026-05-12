@@ -43,6 +43,13 @@ vim.o.smartcase = true
 vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- configure line wrapping
+vim.opt.wrap=true
+vim.opt.breakindent = true
+vim.opt.breakindentopt="sbr"
+vim.opt.showbreak = "   ↪"
+vim.opt.linebreak=true
+
 vim.o.mouse = 'a' --enable mouse support?
 
 -- limit results in lsp list
