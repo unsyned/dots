@@ -36,7 +36,17 @@ local status_ok, kanagawa = pcall(require, 'kanagawa')
 if not status_ok then
   vim.cmd.colorscheme('retrobox')
 else
-  kanagawa.setup({})
+  kanagawa.setup({
+    colors = {
+      theme = {
+        all = {
+          ui = {
+            bg_gutter = "none"
+          }
+        }
+      }
+    }
+  })
   vim.cmd.colorscheme('kanagawa')
 end
 

@@ -8,6 +8,7 @@ vim.o.showmode = false
 -- Show live replace changes in split buffer
 vim.opt.inccommand = "split"
 
+vim.opt.scl = "number"
 -- fix lsp not recognizing library = vim.api.nvim_get_runtime_file("", true),
 -- vim.diagnostic.config({
 --   virtual_text = {
