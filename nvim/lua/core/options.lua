@@ -3,10 +3,10 @@
 vim.o.number=true
 vim.o.relativenumber=true
 vim.o.syntax="on"
-vim.o.showmatch=true --highlight matching brackets
+vim.o.showmatch=true -- highlight matching brackets
 vim.o.showmode = false
--- Show live replace changes in split buffer
-vim.opt.inccommand = "split"
+vim.opt.inccommand = "split" -- show live replace changes in split buffer
+vim.opt.hidden = true
 
 vim.opt.scl = "number"
 -- fix lsp not recognizing library = vim.api.nvim_get_runtime_file("", true),
