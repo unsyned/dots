@@ -45,10 +45,10 @@ vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- configure line wrapping
 vim.opt.wrap=true
-vim.opt.breakindent = true
-vim.opt.breakindentopt="sbr"
-vim.opt.showbreak = "   ↪"
 vim.opt.linebreak=true
+vim.opt.breakindent = true
+vim.opt.breakindentopt="shift:3"
+-- vim.opt.showbreak ="↪" -- if empty spaces gets too unclear, add ↪ at the end
 
 vim.o.mouse = 'a' --enable mouse support?
 
