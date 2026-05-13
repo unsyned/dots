@@ -67,3 +67,11 @@ vim.api.nvim_create_autocmd("TextYankPost", {
  vim.api.nvim_create_autocmd("InsertEnter", { command = [[set norelativenumber]] })
 
 vim.api.nvim_create_autocmd("InsertLeave", { command = [[set relativenumber]] })
+
+-- start terminal mode in insert
+vim.api.nvim_create_autocmd("TermOpen", {
+  group = vim.api.nvim_create_augroup("custom-term-open", { clear = true }),
+  callback = function()
+    vim.cmd.startinsert()
+  end,
+})
