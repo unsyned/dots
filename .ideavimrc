@@ -1,0 +1,111 @@
+let mapleader = " "
+
+set number relativenumber
+
+set showmode
+set showcmd
+set hlsearch
+set cursorline
+set ignorecase smartcase
+set incsearch
+
+set wrap
+set breakindent
+
+" plugins
+set surround
+set sneak
+set NERDTree
+set VimEverywhere
+set highlightedyank
+
+" absolute line numbers in insert mode, relative in normal
+" this is for you Invader Zim
+augroup line_numbers
+  autocmd!
+  autocmd InsertEnter * :set norelativenumber<CR>
+  autocmd InsertLeave * :set relativenumber<CR>
+augroup END
+
+"""""""""""""" AUGMENTS """"""""""""""
+" changing default behavior
+" clear search highlights
+nnoremap <silent> <Esc> :nohlsearch<CR>
+
+" center on common scroll actions
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzz
+nnoremap n Nzz
+
+" indent and preserve selection
+vnoremap < <gv
+vnoremap > >gv
+
+"""""""""""""" AMENDMENTS """"""""""""""
+" esc for traditional keyboards
+inoremap jj <esc>
+
+" add space above/below
+nnoremap <leader>a o<Esc>
+nnoremap <leader>i O<Esc>
+
+" move lines with alt up/down in all modes
+nnoremap <A-Down> :m+1<CR>==
+nnoremap <A-Up> :m-2<CR>==
+inoremap <A-Down> :m+1<CR>==gi
+inoremap <A-Up> :m-2<CR>==gi
+vnoremap <A-Down> :m '>+1<CR>gv=gv
+vnoremap <A-Up> :m '<-2<CR>gv=gv
+
+" duplicate line
+nnoremap <M-d> yyp
+
+" system clipboard interface
+" copy
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nmap <leader>Y "+Y
+
+" paste
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
+
+" cut
+nnoremap <leader>d "+d
+nnoremap <leader>D "+D
+vnoremap <leader>d "+d
+vnoremap <leader>D "+D
+
+" window nav
+nnoremap <C-s> <C-w><C-w>
+nnoremap <C-w> <C-w><C-w>
+
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-l> <C-w><C-l>
+
+" open commands
+nnoremap <leader>e :NERDTreeToggle<CR>
+nnoremap <leader>ot :action ActivateTerminalToolWindow<CR>
+nnoremap <leader>oc :action ActivateGithubCopilotChatToolWindow<CR>
+
+nnoremap <leader>or :action ReopenClosedTab<CR>
+
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fr :action RecentFiles<CR>
+nnoremap <leader>fa :action SearchEverywhere<CR>
+
+nnoremap <leader>mo :action MoveEditorToOppositeTabGroup<CR>
+
+" git actions
+" toggle blame
+nnoremap <leader>tb :action Annotate<CR>
+nnoremap <leader>hs :action Git.Stage.Hunk<CR>
+nnoremap <leader>hu :action Git.Unstage.Hunk<CR>
+vnoremap <leader>hs :action Git.Stage.Selected<CR>
+vnoremap <leader>hu :action Git.Unstage.Selected<CR>
+
