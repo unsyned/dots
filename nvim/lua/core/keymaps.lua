@@ -40,15 +40,11 @@ end, { desc = "fzf: Buffer interactive list" })
 -- clear search results highlights upon esc
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights", silent = true })
 
+map("n", "<M-d>", "yyp", { desc = "Duplicate line"})
+
 -- go to middle of line (may want to use this bind for "go to last mark" instead)
 -- alternative is :call cursor(0, len(getline('.'))/2)
 map("n", "<leader>m", "gM", { desc = "Go to middle of line" })
-
--- quick marks
-map("n", "<leader>s", "`s", { desc = "Go to s mark" })
-map("n", "<leader><leader>s", "ms", { desc = "Create s mark" })
-map("n", "<leader>r", "`r", { desc = "Go to r mark" })
-map("n", "<leader><leader>r", "mr", { desc = "Create r mark" })
 
 -- add empty line below and above lines with leader i a
 map("n", "<leader>i", "mzO<Esc>0D`z", { desc = "Insert space" })
@@ -61,27 +57,29 @@ map("n", "<A-Down>", "<cmd>m+<CR>==", { desc = "Move line down" })
 -- switch window focus
 -- NOTE: trying the ctrl window binds again
 map("n", "<C-s>", "<C-w><C-w>", { desc = "Shift/cycle focus to next window" })
+map("i", "<C-s>", "<esc><C-w><C-w>a", { desc = "Shift/cycle focus to next window" })
 -- NOTE: if ctrl s causes the terminal to freeze, consider adding `stty -ixon` in the zshrc and bashrc. may compromise backward incremental search though
 map("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-map("n", "<leader>ww", "<C-w><C-w>", { desc = "Cycle focus to next window" })
-
 map("n", "<leader>w<Left>", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<leader>w<Right>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<leader>w<Down>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 map("n", "<leader>w<Up>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
--- for normie boards NOTE: is this still needed
+-- for normie boards. leaving duplicates for symmetry + options until I settle into one (or don't)
 map("n", "<leader>wh", "<C-w><C-h>", { desc = "Move focus to the left window" })
 map("n", "<leader>wl", "<C-w><C-l>", { desc = "Move focus to the right window" })
 map("n", "<leader>wj", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 map("n", "<leader>wk", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Manage splits
+map("n", "<leader>ww", "<C-w><C-w>", { desc = "Cycle focus to next window" })
+map("n", "<leader>wr", "<C-w><C-r>", { desc = "Rotate windows", silent = true })
 map("n", "<leader>ws", ":sp<CR>", { desc = "Open split", silent = true })
 map("n", "<leader>wv", ":vsp<CR>", { desc = "Open vertical split", silent = true })
+map("n", "<leader>wo", ":only<CR>", { desc = "Open vertical split", silent = true })
 
 -- resize splits with (meta) alt + <,>,s,f
 -- TODO: consider deleting these
@@ -105,14 +103,24 @@ map({"n", "v"}, "<leader>d", '"_d', { desc = "Delete without yanking" })
 map({"n", "v"}, "<leader>D", '"_d$', { desc = "Delete without yanking" })
 
 -- buffer nav
+map("n", "gb", ":b#<CR>", { desc = "Alt buffer" })
 map("n", "<M-l>", ":b#<CR>", { desc = "Alt buffer" , silent = true })
-map("n", "<C-n>", ":bn<CR>", { desc = "Next buffer" , silent = true })
-map("n", "<C-p>", ":bp<CR>", { desc = "Previous buffer" , silent = true })
+map("n", "<M-n>", ":bn<CR>", { desc = "Next buffer" , silent = true })
+map("n", "<M-p>", ":bp<CR>", { desc = "Previous buffer" , silent = true })
 
 map("n", "<leader>bn", ":bn<CR>", { desc = "Next buffer" , silent = true })
 map("n", "<leader>bp", ":bp<CR>", { desc = "Previous buffer" , silent = true })
 map("n", "<leader>bd", ":bd<CR>", { desc = "Delete buffer" , silent = true })
 map("n", "<leader>ba", ":bad %:h/", { desc = "Add buffer" , silent = true })
+-- consider alt + <num> to switch to buffer number
+
+-- tab nav TODO: WIP
+map("n", "<C-n>", ":tabnext<CR>", { desc = "Next tab" , silent = true })
+map("n", "<C-p>", ":tabprevious<CR>", { desc = "Previous tab" , silent = true })
+-- TODO: the t prefix is colliding with the "toggle" prefix. may have to rearrange
+map("n", "<leader>tn", ":tabnew<CR>", { desc = "Add tab" , silent = true })
+map("n", "<leader>to", ":tabonly<CR>", { desc = "Collapse tabs into one" , silent = true })
+-- consider ctrl + <num> for going to tab number, or leader number
 
 -- quickfix nav
 map("n", "<M-j>", ":cn<CR>", { desc = "Next quickfix" , silent = true })
