@@ -130,6 +130,22 @@ map("n", "<M-k>", ":cp<CR>", { desc = "Previous quickfix" , silent = true })
 map("n", "<leader>ot", ":sp | te<CR>", { desc = "Open terminal in split" , silent = true })
 map("n", "<leader>oe", ":Ex<CR>", { desc = "Open explorer (head directory)" , silent = true })
 
+vim.keymap.set({ "n", "x", "o" }, "<A-o>", function()
+	if vim.treesitter.get_parser(nil, nil, { error = false }) then
+		require("vim.treesitter._select").select_parent(vim.v.count1)
+	else
+		vim.lsp.buf.selection_range(vim.v.count1)
+	end
+end, { desc = "select parent treesitter node or outer incremental lsp selections" })
+
+vim.keymap.set({ "n", "x", "o" }, "<A-i>", function()
+	if vim.treesitter.get_parser(nil, nil, { error = false }) then
+		require("vim.treesitter._select").select_child(vim.v.count1)
+	else
+		vim.lsp.buf.selection_range(-vim.v.count1)
+	end
+end, { desc = "select child treesitter node or inner incremental lsp selections" })
+
 --------------------INSERT MODE--------------------
 -- augments
 -- easy Esc on normie boards
