@@ -18,6 +18,16 @@ map("n", "<C-u>", "<C-u>zz", { desc = "Half page up, center cursor" })
 map("n", "n", "nzzzv", { desc = "Next search result, unfold" })
 map("n", "N", "Nzzzv", { desc = "Previous search result, unfold" })
 
+-- map ctrl c to esc, shift esc to ctrl c. 
+-- trying to switch to ctrl c on traditional layouts
+-- ( I still want access to ctrl c function, but I want to send the insert leave event)
+map("i", "<C-c>", "<Esc>", {  })
+map("i", "<S-Esc>", "<C-c>", {  })
+
+-- remap j and k to visual lines
+map("n", "j", "gj", {  })
+map("n", "k", "gk", {  })
+
 -- better J [[TENTATIVE]]
 map("n", "J", "mzJ`z", { desc = "Join lines, preserve cursor position" })
 
