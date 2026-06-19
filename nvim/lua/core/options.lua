@@ -43,6 +43,9 @@ vim.o.smartcase = true
 vim.o.list = true
 vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
+-- add angles to matchpairs for %
+vim.opt.matchpairs:append("<:>")
+
 -- configure line wrapping
 vim.opt.wrap=true
 vim.opt.linebreak=true
