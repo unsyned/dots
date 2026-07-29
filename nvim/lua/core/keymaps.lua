@@ -50,7 +50,9 @@ end, { desc = "fzf: Buffer interactive list" })
 -- clear search results highlights upon esc
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights", silent = true })
 
+-- duplicate lines
 map("n", "<M-d>", "yyp", { desc = "Duplicate line"})
+map({"n", "v"}, "<M-d>", 'y`>pgv', { desc = "Duplicate selection, preserve selection" })
 
 -- go to middle of line (may want to use this bind for "go to last mark" instead)
 -- alternative is :call cursor(0, len(getline('.'))/2)
@@ -111,6 +113,7 @@ map("n", "Y", "y$", { desc = "Yank to end of line" })
 -- delete without yanking
 map({"n", "v"}, "<leader>d", '"_d', { desc = "Delete without yanking" })
 map({"n", "v"}, "<leader>D", '"_d$', { desc = "Delete without yanking" })
+
 
 -- buffer nav
 map("n", "gb", ":b#<CR>", { desc = "Alt buffer" })
