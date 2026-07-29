@@ -52,7 +52,7 @@ map("n", "<Esc>", "<cmd>nohlsearch<CR>", { desc = "Clear search highlights", sil
 
 -- duplicate lines
 map("n", "<M-d>", "yyp", { desc = "Duplicate line"})
-map({"n", "v"}, "<M-d>", 'y`>pgv', { desc = "Duplicate selection, preserve selection" })
+map({"n", "v"}, "<M-d>", "y`>pgv", { desc = "Duplicate selection, preserve selection" })
 
 -- go to middle of line (may want to use this bind for "go to last mark" instead)
 -- alternative is :call cursor(0, len(getline('.'))/2)
