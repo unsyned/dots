@@ -14,7 +14,7 @@
 
     # games
     steam
-    wineWowPackages.stable # https://nixos.wiki/wiki/Wine
+    wineWow64Packages.stable # https://nixos.wiki/wiki/Wine
 
     # cli
     tree
@@ -36,8 +36,8 @@
     libreoffice
 
     # DE stuff - move out if it gets too big or has logic
-    kdePackages.sddm-kcm
-    kdePackages.kde-gtk-config
+    # kdePackages.sddm-kcm
+    # kdePackages.kde-gtk-config
     wayland-utils # Wayland diagnostic tools
     wl-clipboard # Wayland copy/paste support
     libsForQt5.qtstyleplugin-kvantum
@@ -47,6 +47,7 @@
     # qt6ct
     qt6Packages.qt6ct
     libsForQt5.qt5ct
+    # nirimod
   ]) ++ (with upkgs; [
     neovim
     discord
@@ -96,6 +97,7 @@
     # other applications
     obsidian.enable = true;
     vscode.enable = true;
+    helium.enable = true;
 
     # gaming/media applications
     lutris.enable = true;

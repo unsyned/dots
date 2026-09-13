@@ -1,13 +1,25 @@
 { inputs, config, pkgs, ... }:
 
+# for initialization on a new system, must use nix run first: nix run github:nix-community/home-manager/release-26.05 -- switch --flake .#unsyned
+# where the version should be the version of your system
+
 {
   imports = [
+    inputs.noctalia.homeModules.default
+    inputs.helium-flake.homeModules.default
     # inputs.plasma-manager.homeManagerModules.plasma-manager
     ./sh.nix
     ./apps.nix
     ./emacs.nix
     # ./plasma.nix
   ];
+
+  programs.noctalia.enable = true;
+  programs.swaylock.enable = true; # Super+Alt+L in the default setting (screen locker)
+  programs.waybar.enable = true; # launch on startup in the default setting (bar)
+  services.mako.enable = true; # notification daemon
+  services.swayidle.enable = true; # idle management daemon
+  services.polkit-gnome.enable = true; # polkit
 
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
@@ -21,12 +33,16 @@
   # You should not change this value, even if you update Home Manager. If you do
   # want to update the value, then make sure to first check the Home Manager
   # release notes.
-  home.stateVersion = "25.11"; # Please read the comment before changing.
+  home.stateVersion = "26.05"; # Please read the comment before changing.
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = [
-
+    pkgs.localsend # airdrop alternative
+    pkgs.xwayland-satellite # xwayland support for niri
+    pkgs.swaybg # wallpaper for niri
+    pkgs.ddcutil # brightness control
+    pkgs.brightnessctl # brightness control
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
