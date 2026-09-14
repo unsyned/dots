@@ -1,4 +1,4 @@
-{ inputs, config, pkgs, ... }:
+{ inputs, config, pkgs, oniri, ... }:
 
 # for initialization on a new system, must use nix run first: nix run github:nix-community/home-manager/release-26.05 -- switch --flake .#unsyned
 # where the version should be the version of your system
@@ -43,6 +43,7 @@
     pkgs.swaybg # wallpaper for niri
     pkgs.ddcutil # brightness control
     pkgs.brightnessctl # brightness control
+    oniri
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of

@@ -103,6 +103,23 @@
         "type": "github"
       }
     },
+    "oniri-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788106422,
+        "narHash": "sha256-BT5KVE5zT2z4gO2GLYV+ZtCQ8e9nUegxOnhkoywnrDo=",
+        "owner": "Antiz96",
+        "repo": "oniri",
+        "rev": "a62cd8a93d17ed749c71289651b8f60be7f3bb38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Antiz96",
+        "ref": "v1.3.5",
+        "repo": "oniri",
+        "type": "github"
+      }
+    },
     "plasma-manager": {
       "inputs": {
         "home-manager": [
@@ -133,6 +150,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-unstable": "nixpkgs-unstable",
         "noctalia": "noctalia",
+        "oniri-src": "oniri-src",
         "plasma-manager": "plasma-manager",
         "zen-browser": "zen-browser"
       }

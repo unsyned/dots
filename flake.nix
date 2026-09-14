@@ -41,12 +41,18 @@
       url = "github:oxcl/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    oniri-src = {
+      # https://github.com/NixOS/nix/blob/1ed54a0fd62da96d4f5e9c806555861e46f65341/src/nix/flake.md?plain=1#L315
+      url = "github:Antiz96/oniri/v1.3.5";
+      flake = false; # treat this as source code instead of a flake
+    };
   };
 
 
-  outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, noctalia, helium-flake, ... } @ inputs :
+  outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, noctalia, helium-flake, oniri-src, ... } @ inputs :
   # outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... } @ inputs :
-    let 
+    let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
       # this version cannot be congfigured?
@@ -59,50 +65,79 @@
         ];
       };
 
+      oniri = pkgs.rustPlatform.buildRustPackage {
+        # documentation
+        pname = "oniri";
+        version = "1.3.5";
+
+        src = oniri-src;
+
+        cargoLock.lockFile = "${oniri-src}/Cargo.lock";
+
+        nativeBuildInputs = with pkgs; [
+          pkg-config
+        ];
+
+        meta = {
+          description = "Niri support to maximize lone windows on a workspace.";
+          homepage = "https://github.com/Antiz96/oniri";
+          license = pkgs.lib.licenses.gpl3Plus;
+        };
+      };
+
       upkgs = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
-    in {
+      in {
+        # packages.${system}.oniri = oniri;
+        # packages.${system}.default = oniri;
+        packages = {
+          ${system} = {
+            oniri = oniri;
+            default = oniri;
+          };
+        };
 
-    nixosConfigurations = {
-      iris = lib.nixosSystem {
-        inherit system;
-        inherit pkgs;
-        modules = [
-          ./configuration.nix
-          ./hosts/iris/configuration.nix
-          ./hosts/iris/hardware-configuration.nix
+        nixosConfigurations = {
+          iris = lib.nixosSystem {
+            inherit system;
+            inherit pkgs;
+            modules = [
+              ./configuration.nix
+                ./hosts/iris/configuration.nix
+                ./hosts/iris/hardware-configuration.nix
 
-          {
-            environment.systemPackages = with pkgs; [
-              helium
+                {
+                  environment.systemPackages = with pkgs; [
+                    helium
+                  ];
+                }
             ];
-          }
-        ];
-      };
+          };
 
-      # nic = lib.nixosSystem {
-      #   inherit system;
-      #   modules = [
-      #     ./configuration.nix
-      #       ./hosts/iris/configuration.nix
-      #       ./hosts/iris/hardware-configuration.nix
-      #   ];
-      # }
-    };
+# nic = lib.nixosSystem {
+#   inherit system;
+#   modules = [
+#     ./configuration.nix
+#       ./hosts/iris/configuration.nix
+#       ./hosts/iris/hardware-configuration.nix
+#   ];
+# }
+        };
 
-    homeConfigurations = {
-      unsyned = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [ ./home.nix ];
-        extraSpecialArgs = {
-          inherit upkgs;
-          inherit inputs;
-          inherit zen-browser;
-          inherit noctalia;
+        homeConfigurations = {
+          unsyned = home-manager.lib.homeManagerConfiguration {
+            inherit pkgs;
+            modules = [ ./home.nix ];
+            extraSpecialArgs = {
+              inherit upkgs;
+              inherit inputs;
+              inherit zen-browser;
+              inherit noctalia;
+              inherit oniri;
+            };
+          };
         };
       };
-    };
-  };
 }
