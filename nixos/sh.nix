@@ -18,6 +18,9 @@ in
     # shell things :P
     zsh = {
       enable = true;
+      enableBashCompletion = true;
+      autosuggestions.enable = true;
+      syntaxHighlighting.enable = true;
       shellAliases = aliases;
       oh-my-zsh = {
         enable = true;

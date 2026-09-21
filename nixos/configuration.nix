@@ -84,7 +84,46 @@
   # services.xserver.desktopManager.xfce.enable = true;
   programs.xwayland.enable = true;
   programs.niri.enable = true;
-  services.displayManager.ly.enable = true;
+  # services.displayManager.ly.enable = false;
+  services.greetd = {
+    enable = true;
+    settings = {
+      initial_session = {
+        command = "${pkgs.niri}/bin/niri-session";
+        user = "unsyned";
+      };
+      default_session = {
+        command = "${pkgs.noctalia-greeter}/bin/noctalia-greeter-session";
+        user = "greeter";
+      };
+      # default_session = initial_session;
+    };
+  };
+
+## would love to enable fingerprint reader but it's not seamless atm. requires fingerprint to unlock and disables password until timeout and failed attempt at finger unlock
+  # security.pam.services.greetd.allowNullPassword = true; # required for initial session (autologin on first boot) to work
+  # security.pam.services.sudo.fprintAuth = true;
+  # services.fprintd.enable = true;
+  # security.pam.services.greetd = {
+  #   fprintAuth = true; # fingerprint auth (pam_fprintd)
+  #   u2fAuth = true; # U2F keys
+  # };
+
+#TODO uncomment later
+  # services.displayManager = {
+  #   autoLogin = {
+  #     enable = true;
+  #     user = "unsyned";
+  #   };
+  # };
+
+  # services.displayManager.dms-greeter = {
+  #   enable = true;
+  #   compositor.name = "niri";
+  # };
+  # services.displayManager.noctalia-greeter = {
+  #   enable = true;
+  # };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -107,7 +146,7 @@
     #jack.enable = true;
 
     # Use the WirePlumber session manager
-    #wireplumber.enable = true;
+    # wireplumber.enable = true;
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
@@ -118,24 +157,19 @@
   users.users."unsyned" = {
     isNormalUser = true;
     description = "sy";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "greetd" ];
     packages = with pkgs; [
     #  thunderbird
     ];
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
-  # nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile.
-  # You can use https://search.nixos.org/ to find more packages (and options).
   environment.systemPackages = with pkgs; [
     neovim
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    vim
     git
+    curl
   #   wget
   ];
 

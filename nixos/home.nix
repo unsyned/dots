@@ -57,6 +57,7 @@
     #   echo "Hello, ${config.home.username}!"
     # '')
   ];
+  # services.displayManager.noctalia-greeter.enable = true;
 
   # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.

@@ -42,12 +42,14 @@
     wl-clipboard # Wayland copy/paste support
     libsForQt5.qtstyleplugin-kvantum
     qt6Packages.qtstyleplugin-kvantum
+    playerctl
 
     # theming... required for all DEs and WMs I think?
     # qt6ct
     qt6Packages.qt6ct
     libsForQt5.qt5ct
     # nirimod
+    noctalia-greeter
   ]) ++ (with upkgs; [
     neovim
     discord
