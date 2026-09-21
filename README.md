@@ -1,3 +1,8 @@
+## NixOS
+- home-manager switch --flake $HOME/dots/nixos/#{user} should work from anywhere to build the system after initial set up and cloning of dots dir
+- if having issues with audio or audio through hdmi, make sure graphics drivers are installed
+
+
 ## todo
 - ~set up qmk and~ qmk userspace
 - ~keyboard shortcut toggle for night light~
