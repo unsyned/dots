@@ -1,13 +1,6 @@
 { pkgs, upkgs, zen-browser, ... }:
 
-# let
-
-#   pkgsUnstable = import <nixpkgs-unstable> {};
-
-# in
-
 {
-  # home.packages = with pkgs; [
   home.packages = (with pkgs; [
     spotify
     zen-browser.packages.${pkgs.system}.default
@@ -24,16 +17,10 @@
     ripgrep
     # zoxide
 
-    # keyboard // qmk, vial, via
-    qmk
-    via
-    vial
-    # required for qmk
-    dos2unix
-
     # utility
     google-chrome
     libreoffice
+    localsend # airdrop alternative
 
     # DE stuff - move out if it gets too big or has logic
     # kdePackages.sddm-kcm
@@ -42,27 +29,15 @@
     wl-clipboard # Wayland copy/paste support
     libsForQt5.qtstyleplugin-kvantum
     qt6Packages.qtstyleplugin-kvantum
-    playerctl
 
     # theming... required for all DEs and WMs I think?
     # qt6ct
     qt6Packages.qt6ct
     libsForQt5.qt5ct
-    # nirimod
-    noctalia-greeter
   ]) ++ (with upkgs; [
     neovim
     discord
   ]);
-
-  # qt = {
-  #   enable = true;
-  #   platformTheme = "qtct";
-  #
-  #   kvantum = {
-  #     enable = true;
-  #   };
-  # };
 
   programs = {
     # cli
@@ -81,17 +56,12 @@
       # extraConfig = {}; # for things that aren't integrated yet
     };
 
-    # neovim = {
-    #   enable = true;
-    #   package = upkgs.neovim;
-    # };
     zoxide = {
       enable = true;
       enableBashIntegration = true;
       enableZshIntegration = true;
     };
 
-    # emacs.enable = true;
     bat.enable = true;
     ghostty.enable = true;
     yazi.enable = true;

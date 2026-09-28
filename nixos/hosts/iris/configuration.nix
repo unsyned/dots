@@ -1,14 +1,13 @@
-# hosts/desktop/configuration.nix
+# hosts/iris/configuration.nix
 
 { pkgs, ... }:
 
 {
-# handling imports in flake.nix for now
-# imports = [
-#   ../../modules/common.nix
-#   ../../modules/desktop.nix
-#   ./hardware-configuration.nix
-# ];
+
+  audio.enable = true;
+  keyb.enable = true;
+
+  boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
   networking.hostName = "iris";
 
@@ -20,7 +19,8 @@
     extraPackages = with pkgs; [
   # Required for modern Intel GPUs (Xe iGPU and ARC)
       intel-media-driver     # VA-API (iHD) userspace
-        vpl-gpu-rt             # oneVPL (QSV) runtime
+      intel-vaapi-driver
+      vpl-gpu-rt             # oneVPL (QSV) runtime
 
   # Optional (compute / tooling):
         intel-compute-runtime  # OpenCL (NEO) + Level Zero for Arc/Xe
@@ -33,5 +33,9 @@
     LIBVA_DRIVER_NAME = "iHD";     # Prefer the modern iHD backend
   # VDPAU_DRIVER = "va_gl";      # Only if using libvdpau-va-gl
   };
+# turns off dock controller deep sleep to reduce time for monitor initialization on docking stations
+  boot.kernelParams = [ "pcie_aspm=off" ];
+
+  system.stateVersion = "26.05"; # Did you read the comment?
 }
 

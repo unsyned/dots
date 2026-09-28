@@ -1,6 +1,7 @@
+# nixos/flake.nix
 {
 
-  description = "My NixOS systems";
+  description = "Sy's nixos system flake";
 
   # to resolve noctalia cache issues, recommended by noctalia on nix
   nixConfig = {
@@ -51,7 +52,6 @@
 
 
   outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, noctalia, helium-flake, oniri-src, ... } @ inputs :
-  # outputs =  {self, nixpkgs, nixpkgs-unstable, home-manager, zen-browser, ... } @ inputs :
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -79,7 +79,7 @@
         ];
 
         meta = {
-          description = "Niri support to maximize lone windows on a workspace.";
+          description = "Niri support to dynamically maximize lone windows on a workspace.";
           homepage = "https://github.com/Antiz96/oniri";
           license = pkgs.lib.licenses.gpl3Plus;
         };
@@ -101,29 +101,34 @@
 
         nixosConfigurations = {
           iris = lib.nixosSystem {
-            inherit system;
-            inherit pkgs;
+            inherit system pkgs;
+
+            specialArgs = {
+              inherit noctalia oniri inputs;
+            };
+
             modules = [
               ./configuration.nix
-                ./hosts/iris/configuration.nix
-                ./hosts/iris/hardware-configuration.nix
+              ./hosts/iris/configuration.nix
+              ./hosts/iris/hardware-configuration.nix
+              ./mods
 
-                {
-                  environment.systemPackages = with pkgs; [
-                    helium
-                  ];
-                }
+              {
+                environment.systemPackages = with pkgs; [
+                  helium
+                ];
+              }
             ];
           };
 
-# nic = lib.nixosSystem {
-#   inherit system;
-#   modules = [
-#     ./configuration.nix
-#       ./hosts/iris/configuration.nix
-#       ./hosts/iris/hardware-configuration.nix
-#   ];
-# }
+          # nic = lib.nixosSystem {
+          #   inherit system;
+          #   modules = [
+          #     ./configuration.nix
+          #       ./hosts/iris/configuration.nix
+          #       ./hosts/iris/hardware-configuration.nix
+          #   ];
+          # }
         };
 
         homeConfigurations = {
