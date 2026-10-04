@@ -22,7 +22,7 @@
     libreoffice
     localsend # airdrop alternative
 
-    # DE stuff - move out if it gets too big or has logic
+    # TODO move to a kde module
     # kdePackages.sddm-kcm
     # kdePackages.kde-gtk-config
     wayland-utils # Wayland diagnostic tools
@@ -30,16 +30,17 @@
     libsForQt5.qtstyleplugin-kvantum
     qt6Packages.qtstyleplugin-kvantum
 
-    # theming... required for all DEs and WMs I think?
-    # qt6ct
-    qt6Packages.qt6ct
-    libsForQt5.qt5ct
   ]) ++ (with upkgs; [
     neovim
     discord
   ]);
 
   programs = {
+    #
+    keepassxc = {
+      enable = true;
+      autostart = true;
+    };
     # cli
     git = {
       enable = true;

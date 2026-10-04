@@ -46,8 +46,7 @@
     # '')
   ];
 
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
-  # plain files is through 'home.file'.
+  home-manager.backupFileExtension = "backup";
   home.file."${config.xdg.configHome}/nvim" = {
   # home.file.".config/nvim" = { # equivalent to the above
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/nvim";
@@ -55,6 +54,10 @@
   };
   home.file."${config.xdg.configHome}/doom" = {
     source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/doom";
+    recursive = true;
+  };
+  home.file."${config.xdg.configHome}/niri" = {
+    source = config.lib.file.mkOutOfStoreSymlink "${config.home.homeDirectory}/dots/niri";
     recursive = true;
   };
 

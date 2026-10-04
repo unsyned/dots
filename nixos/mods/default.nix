@@ -7,6 +7,8 @@
     ./audio.nix
     ./keyb.nix
     ./niri
+    ./thunar
+    ./style
   ];
 
 }

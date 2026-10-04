@@ -6,6 +6,8 @@
 
   audio.enable = true;
   keyb.enable = true;
+  thunar.enable = true;
+  style.enable = true;
 
   boot.kernelPackages = pkgs.linuxKernel.packages.linux_7_2;
 
