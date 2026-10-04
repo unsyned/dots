@@ -15,6 +15,7 @@
 
       nwg-look # theming gtk
 
+      phinger-cursors
       papirus-icon-theme
       kora-icon-theme
     ];
