@@ -35,6 +35,8 @@
     discord
   ]);
 
+  xdg.autostart.enable = true;
+
   programs = {
     #
     keepassxc = {

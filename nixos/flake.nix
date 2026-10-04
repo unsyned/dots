@@ -90,8 +90,6 @@
         config.allowUnfree = true;
       };
       in {
-        # packages.${system}.oniri = oniri;
-        # packages.${system}.default = oniri;
         packages = {
           ${system} = {
             oniri = oniri;
@@ -113,10 +111,34 @@
               ./hosts/iris/hardware-configuration.nix
               ./mods
 
+              home-manager.nixosModules.home-manager
+
               {
                 environment.systemPackages = with pkgs; [
                   helium
                 ];
+
+                home-manager = {
+                  backupFileExtension = "bak";
+                  useGlobalPkgs = true;
+
+                  extraSpecialArgs = {
+                    inherit upkgs;
+                    inherit inputs;
+                    inherit zen-browser;
+                    inherit noctalia;
+                    inherit oniri;
+                  };
+
+                  users.unsyned = {
+                    imports = [ ./home.nix ];
+
+                    home.stateVersion = "26.05";
+
+                    home.username = "unsyned";
+                    home.homeDirectory = "/home/unsyned";
+                  };
+                };
               }
             ];
           };
@@ -131,18 +153,20 @@
           # }
         };
 
-        homeConfigurations = {
-          unsyned = home-manager.lib.homeManagerConfiguration {
-            inherit pkgs;
-            modules = [ ./home.nix ];
-            extraSpecialArgs = {
-              inherit upkgs;
-              inherit inputs;
-              inherit zen-browser;
-              inherit noctalia;
-              inherit oniri;
-            };
-          };
-        };
+        # homeConfigurations = {
+        #   unsyned = home-manager.lib.homeManagerConfiguration {
+        #     inherit pkgs;
+        #
+        #     modules = [ ./home.nix ];
+        #
+        #     extraSpecialArgs = {
+        #       inherit upkgs;
+        #       inherit inputs;
+        #       inherit zen-browser;
+        #       inherit noctalia;
+        #       inherit oniri;
+        #     };
+        #   };
+        # };
       };
 }
