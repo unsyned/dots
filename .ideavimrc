@@ -58,8 +58,9 @@ inoremap <A-Up> :m-2<CR>==gi
 vnoremap <A-Down> :m '>+1<CR>gv=gv
 vnoremap <A-Up> :m '<-2<CR>gv=gv
 
-" duplicate line
+" duplicate selection
 nnoremap <M-d> yyp
+xnoremap <M-d> y`>pgv
 
 " system clipboard interface
 " copy
